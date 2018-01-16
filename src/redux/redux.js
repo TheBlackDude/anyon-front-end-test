@@ -60,23 +60,23 @@ export const reducer = (state = defaultState, action = {}) => {
     case UPDATE_ITEM:
       return {
         cart: [
-          ...state.cart,
           ...state.cart.filter(item => {
             if (item.id === action.itemId) {
               const value = action.payload ? action.payload.name : action.payload.price
               value === item.name ? item.price = value : item.name = value
             }
+            return null
           })
         ]
       }
     case REMOVE_ITEM:
       return {
         cart: [
-          ...state.cart,
           ...state.cart.filter(item => {
             if (item.id === action.itemId) {
-              ...state.cart.splice(...state.cart.indexOf(item), 1)
+              state.cart.splice(state.cart.indexOf(item), 1)
             }
+            return null
           })
         ]
       }

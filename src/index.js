@@ -9,7 +9,9 @@ import { Provider } from 'react-redux'
 import { createHashHistory } from 'history'
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
 
-import App from './home/App';
+import { mainReducer } from './redux'
+
+import CartContainer from './cart/CartContainer';
 import registerServiceWorker from './registerServiceWorker';
 
 /*
@@ -23,7 +25,7 @@ const history = createHashHistory()
 const createStoreWithState = (initialState = {}) => createStore(
   connectRouter(history)(
     combineReducers({
-      // TODO reducers
+      cart: mainReducer,
     })
   ),
   initialState,
@@ -43,7 +45,7 @@ const store = createStoreWithState()
 ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <CartContainer />
     </ConnectedRouter>
   </Provider>
 ), document.getElementById('root'))
