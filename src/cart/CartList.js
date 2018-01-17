@@ -1,10 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'reactstrap'
 
-const CartList = ({cartList}) => {
+/*
+ * Component responsible for displaying cart items
+ */
+const CartList = ({
+  cartList,
+  handleRemoveItem,
+  handleUpdateItem
+}) => {
   return (
-    <Table responsive>
+    <Table>
       <thead>
         <tr>
           <th>#</th>
@@ -16,9 +23,13 @@ const CartList = ({cartList}) => {
         {
           cartList.map((cart, index) => (
             <tr key={index}>
-              <td key={`${index + 1}`}>{`${index + 1}`}</td>
+              <th key={`${index + 1}`} scope="row">{`${index + 1}`}</th>
               <td key={cart.name}>{cart.name}</td>
               <td key={cart.price}>{cart.price}</td>
+              <td key={`${index + 2}`}>
+                <Button color="danger" onClick={() => handleRemoveItem(index)}>Remove Item</Button>
+                <Button color="danger" onClick={() => handleUpdateItem(index, {name: 'Nokia', price: 300})}>Update</Button>
+                </td>
             </tr>
           ))
         }
@@ -28,5 +39,9 @@ const CartList = ({cartList}) => {
 }
 
 CartList.propTypes = {
-  cartList: PropTypes.array.isRequired
+  cartList: PropTypes.array.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
+  handleUpdateItem: PropTypes.func.isRequired
 }
+
+export default CartList

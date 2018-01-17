@@ -7,9 +7,9 @@ export const REMOVE_ITEM = 'shoppy/redux/REMOVE_ITEM'
 /* defaultState */
 export const defaultState = {
   cart: [
-    {id: 1, name: 'iPhone', price: 500},
-    {id: 2, name: 'Samsung', price: 400},
-    {id: 3, name: 'BlackBerry', price: 800}
+    {id: 0, name: 'iPhone', price: 500},
+    {id: 1, name: 'Samsung', price: 400},
+    {id: 2, name: 'BlackBerry', price: 800}
   ],
 }
 
@@ -62,22 +62,25 @@ export const reducer = (state = defaultState, action = {}) => {
         cart: [
           ...state.cart.filter(item => {
             if (item.id === action.itemId) {
-              const value = action.payload ? action.payload.name : action.payload.price
-              value === item.name ? item.price = value : item.name = value
+              const value = action.payload.name ? action.payload.name : action.payload.price
+              if (typeof value === 'string' && value === item.name) { return null }
+              else if (typeof value === 'string' && value !== item.name) {
+                item.name = value
+              }
+              else {
+                item.price = value
+              }
             }
             return null
-          })
+          }),
+          ...state.cart
         ]
       }
     case REMOVE_ITEM:
       return {
         cart: [
-          ...state.cart.filter(item => {
-            if (item.id === action.itemId) {
-              state.cart.splice(state.cart.indexOf(item), 1)
-            }
-            return null
-          })
+          state.cart.splice(action.itemId, 1),
+          ...state.cart
         ]
       }
     default:
