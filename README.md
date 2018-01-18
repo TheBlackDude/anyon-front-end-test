@@ -8,6 +8,8 @@ Below you will find some information on how to perform common tasks.<br>
 
 In the project directory, you can run:
 
+### `npm install` or `yarn install`
+
 ### `npm start` Or `yarn start`
 
 Runs the app in the development mode.<br>
