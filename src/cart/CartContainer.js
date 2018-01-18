@@ -68,7 +68,7 @@ class CartContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     cart: state.cart.cart
   }
