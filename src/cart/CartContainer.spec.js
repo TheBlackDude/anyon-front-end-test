@@ -23,7 +23,7 @@ describe('CartContainer', () => {
     expect(table.length).toEqual(1)
   })
 
-  it('should containe items inside the state', () => {
+  it('should contain items inside the state', () => {
     const state = componentWithStore.store.getState()
     expect(state.cart).toEqual(store.cart)
   })
